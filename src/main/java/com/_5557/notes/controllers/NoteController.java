@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/note")
 @RequiredArgsConstructor
@@ -16,6 +18,10 @@ public class NoteController {
     @PostMapping("/addNote/{email}")
     public ResponseEntity<Response> addNote(@PathVariable String email, @RequestBody NoteRequest noteRequest) {
         return ResponseEntity.ok(noteService.addNoteToUser(email, noteRequest));
+    }
+    @GetMapping("/getNotes/{email}")
+    public List<Note> getNotes(@PathVariable String email) {
+        return noteService.getNotesWhitUserId(email);
     }
 
 }

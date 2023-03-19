@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -31,18 +32,12 @@ public class NoteService {
         return new Response(Status.SUCCESS);
 
     }
-//    public Response getNoteWhitUserId(String email, NoteRequest noteRequest){
-//
-//        User user = userRepository.findByEmail(email).orElseThrow(()-> new NoSuchElementException("No User Found wit email "+email));
-//
-//        String createAndLastUpdatedAt = String.valueOf(new Date(System.currentTimeMillis()));
-//
-//        Note note = new Note(0L,noteRequest.isFinished(),noteRequest.getContent(),createAndLastUpdatedAt,createAndLastUpdatedAt);
-//
-//        user.getNoteList().add(note);
-//
-//        return new Response(Status.SUCCESS);
-//
-//    }
+    public List<Note> getNotesWhitUserId(String email){
+
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new NoSuchElementException("No User Found wit email "+email));
+
+        return user.getNoteList();
+
+    }
 
 }
